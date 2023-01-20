@@ -42,4 +42,9 @@ export class User {
  
     return true;
   }
+
+  static isValidUserId(id) {
+    const pattern = /^[\w|\d]{8,8}-[\w|\d]{4,4}-[\w|\d]{4,4}-[\w|\d]{4,4}-[\w|\d]{12,12}$/;
+    return pattern.test(id);
+  }
 }

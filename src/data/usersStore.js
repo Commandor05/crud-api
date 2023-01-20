@@ -14,11 +14,7 @@ class UsersStore {
     return this._instance;
   }
 
-  add(user) {
-    if (!User.isValid(user)) {
-      throw Error('Not valid user data');
-    }
-    
+  add(user) {   
     const newUser = new User(user);
     this.users.push(newUser);
     return newUser;
