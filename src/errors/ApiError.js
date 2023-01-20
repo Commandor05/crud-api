@@ -14,7 +14,8 @@ export const ErrorMessages = {
   WRONG_ID_FORMAT: 'Wrong id format',
   NOT_WALID_DATA_FORMAT: 'Not walid data format',
   INVALUD_URL: 'Invalid URL',
-  METHOD_NOT_SUPPORTED: 'Method not supported'
+  METHOD_NOT_SUPPORTED: 'Method not supported',
+  UNKNOWN_ERROR: 'Unknown error'
 }
 
 export default ApiError;
