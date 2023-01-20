@@ -68,7 +68,7 @@ const isValidRoute = (urlParts) => {
     return false;
   }
 
-  if (!(urlParts[1] === 'api' &&  urlParts[2] === 'user')) {
+  if (!(urlParts[1] === 'api' &&  urlParts[2] === 'users')) {
     return false;
   }
 
