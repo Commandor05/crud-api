@@ -6,7 +6,7 @@ import UsersStore from './data/usersStore.js';
 const DEFAULT_API_PORT = 5001;
 
 const hostname = '127.0.0.1'
-const port = process.env.API_PORT || DEFAULT_API_PORT;
+const port = Number(process.env.API_PORT) || DEFAULT_API_PORT;
 new UsersStore();
 
 const server = http.createServer((req, res) => {
