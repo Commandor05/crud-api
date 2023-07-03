@@ -7,6 +7,7 @@ const DEFAULT_API_PORT = 5001;
 
 const hostname = "localhost";
 const port = parseInt(process.env.API_PORT) || DEFAULT_API_PORT;
+
 new UsersStore();
 
 const server = http.createServer((req, res) => {
@@ -14,7 +15,7 @@ const server = http.createServer((req, res) => {
   router(req, res);
 });
 
-server.listen(port, hostname, () => {
+export const app = server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}`);
 });
 
