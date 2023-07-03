@@ -1,10 +1,10 @@
-import { getUrlParam } from '../router/router.js';
-import Controller from './controller.js';
-import { HTTPCodes } from './../router/router.js'
-import { User } from '../data/user.js';
-import ApiError, { ErrorMessages } from '../errors/ApiError.js'
+import { getUrlParam } from "../router/router.js";
+import Controller from "./controller.js";
+import { HTTPCodes } from "./../router/router.js";
+import { User } from "../data/user.js";
+import ApiError, { ErrorMessages } from "../errors/ApiError.js";
 
-export  default class UserController extends Controller {
+export default class UserController extends Controller {
   constructor(usersStore) {
     super();
     this.usersStore = usersStore;
@@ -30,14 +30,14 @@ export  default class UserController extends Controller {
     if (data) {
       this.sendResponse(res, data);
     } else {
-      this.sendResponse(res, { message: ErrorMessages.ID_NOT_EXISTS }, HTTPCodes.NOT_FOUND);
+      throw new ApiError(ErrorMessages.ID_NOT_EXISTS, HTTPCodes.NOT_FOUND);
     }
   }
 
   async create(req, res) {
     const user = await this.getBody(req);
     if (!User.isValid(user)) {
-      throw ApiError(ErrorMessages.NOT_WALID_DATA_FORMAT);
+      throw new ApiError(ErrorMessages.NOT_WALID_DATA_FORMAT);
     }
     const data = this.usersStore.add(user);
     this.sendResponse(res, data, HTTPCodes.CREARED);
@@ -55,16 +55,16 @@ export  default class UserController extends Controller {
 
     const payload = await this.getBody(req);
 
-    if (!User.isValid(payload )) {
-      throw ApiError(ErrorMessages.NOT_WALID_DATA_FORMAT);
+    if (!User.isValid(payload)) {
+      throw new ApiError(ErrorMessages.NOT_WALID_DATA_FORMAT);
     }
-    
+
     const data = this.usersStore.update(param, payload);
-    
+
     if (data) {
       this.sendResponse(res, data, HTTPCodes.OK);
     } else {
-      this.sendResponse(res, { message: ErrorMessages.ID_NOT_EXISTS }, HTTPCodes.NOT_FOUND);
+      throw new ApiError(ErrorMessages.ID_NOT_EXISTS, HTTPCodes.NOT_FOUND);
     }
   }
 
@@ -79,11 +79,11 @@ export  default class UserController extends Controller {
     }
 
     const data = this.usersStore.delete(param);
-    
+
     if (data) {
       this.sendResponse(res, null, HTTPCodes.NO_CONTENT);
     } else {
-      this.sendResponse(res, { message: ErrorMessages.ID_NOT_EXISTS }, HTTPCodes.NOT_FOUND);
+      throw new ApiError(ErrorMessages.ID_NOT_EXISTS, HTTPCodes.NOT_FOUND);
     }
   }
 }
